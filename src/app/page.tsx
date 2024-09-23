@@ -1,235 +1,121 @@
 "use client";
-import { motion } from "framer-motion";
+
+import { useState } from "react";
+import Link from "next/link";
 import Image from "next/image";
 
-function HomePage() {
-  // Motion variants for animation reuse
-  const fadeIn = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 1 } },
-  };
-
-  const slideIn = {
-    hidden: { x: -100, opacity: 0 },
-    visible: {
-      x: 0,
-      opacity: 1,
-      transition: { duration: 1, ease: "easeInOut" },
-    },
-  };
-
-  const hoverEffect = {
-    hover: { scale: 1.05, boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.2)" },
-    tap: { scale: 0.95 },
-  };
+export default function LandingPage() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
-    <div className="bg-background text-text">
+    <div className="min-h-screen bg-[var(--background)] text-[var(--text)]">
       {/* Hero Section */}
-      <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48 bg-gradient-to-r from-purple-600 to-indigo-600">
-        <div className="container px-4 md:px-6">
-          <motion.div
-            className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]"
-            initial="hidden"
-            animate="visible"
-            variants={fadeIn}
-          >
-            <div className="flex flex-col justify-center space-y-4 lg:pe-12">
-              <motion.div
-                className="space-y-2 text-center lg:text-left"
-                initial="hidden"
-                animate="visible"
-                variants={slideIn}
-              >
-                <motion.h1
-                  className="text-3xl font-bold tracking-tighter text-white sm:text-5xl xl:text-6xl"
-                  initial={{ opacity: 0, y: -50 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1 }}
-                >
-                  Unlock Your Mind
-                </motion.h1>
-                <motion.p
-                  className="max-w-[600px] text-zinc-200 md:text-xl mx-auto lg:mx-0"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 1 }}
-                >
-                  Challenge yourself with our Monthly Puzzle subscription. A new
-                  brain-teaser delivered to your inbox every month.
-                </motion.p>
-              </motion.div>
-              <motion.div className="w-full max-w-sm space-y-2 mx-auto lg:mx-0 text-center lg:text-left">
-                <motion.button
-                  className="bg-white text-purple-600 hover:bg-zinc-100 px-8 py-4 rounded-lg text-xl"
-                  variants={hoverEffect}
-                  whileHover="hover"
-                  whileTap="tap"
-                >
-                  Start Puzzling Now
-                </motion.button>
-                <p className="text-xs text-zinc-300">
-                  No credit card required. Cancel anytime.
-                </p>
-              </motion.div>
-            </div>
-            <motion.div
-              className="flex items-center justify-center"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1 }}
-            >
-              <Image
-                alt="Puzzle Pieces"
-                className="aspect-[4/3] overflow-hidden rounded-xl object-cover object-center"
-                height={400}
-                src="/placeholder.svg?height=400&width=600"
-                width={600}
-              />
-            </motion.div>
-          </motion.div>
+      <section className="flex flex-col items-center justify-center min-h-screen bg-primary text-white p-4">
+        <Image
+          src="/misterybox1.png"
+          alt="PuzzleBox"
+          width={200}
+          height={200}
+          className="mb-6"
+        />
+        <h1 className="text-5xl font-bold">Welcome to PuzzleBox</h1>
+        <p className="mt-4 text-lg">
+          Get a unique 3D-printed puzzle delivered to your door every month!
+        </p>
+        <button className="mt-6 bg-accent text-white font-semibold py-3 px-6 rounded-full hover:bg-red-700 transition-all">
+          I want a puzzle
+        </button>
+      </section>
+
+      {/* Reasons */}
+      <section className="py-20 text-center bg-background">
+        <h2 className="text-4xl font-semibold mb-8">Why Choose PuzzleBox?</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <div className="p-6 bg-white rounded-lg shadow-md">
+            <h3 className="text-2xl font-bold mb-4">Unique Designs</h3>
+            <p>
+              Each puzzle is designed by our creative team to provide a fresh
+              challenge every month.
+            </p>
+          </div>
+          <div className="p-6 bg-white rounded-lg shadow-md">
+            <h3 className="text-2xl font-bold mb-4">High-Quality Prints</h3>
+            <p>
+              3D-printed using the latest technology to ensure precision and
+              durability.
+            </p>
+          </div>
+          <div className="p-6 bg-white rounded-lg shadow-md">
+            <h3 className="text-2xl font-bold mb-4">Delivered to Your Door</h3>
+            <p>
+              Convenient monthly deliveries so you always have something new to
+              solve.
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-16 px-4 bg-gradient-to-r from-purple-600 to-indigo-600">
-        <div className="max-w-6xl mx-auto text-center">
-          <motion.h2
-            className="text-4xl font-bold mb-8 text-background"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
-          >
-            Why Puzzle Monthly?
-          </motion.h2>
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={{
-              visible: {
-                transition: { staggerChildren: 0.2 },
-              },
-            }}
-          >
-            {[
-              {
-                number: "1",
-                title: "Boost IQ",
-                description: "Engage your brain.",
-              },
-              {
-                number: "2",
-                title: "Impress Friends",
-                description: "Show off your skills.",
-              },
-              {
-                number: "3",
-                title: "Have Fun!",
-                description: "Enjoy hours of entertainment.",
-              },
-            ].map((feature, index) => (
-              <motion.div
-                className="flex flex-col items-center justify-center p-6 rounded-full bg-secondary shadow-lg hover:bg-white transition-colors duration-300 border-4 border-purple-600 hover:border-accent"
-                variants={fadeIn}
-                whileHover={{ scale: 1.05 }}
-                key={index}
-              >
-                <motion.div className="text-5xl font-bold text-purple-600 mb-2">
-                  {feature.number}
-                </motion.div>
-                <h3 className="text-lg font-bold text-text mb-2">
-                  {feature.title}
-                </h3>
-                <p className="text-sm text-text text-center">
-                  {feature.description}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
+
+      {/* Pricing */}
+      <section className="py-20 bg-secondary text-center">
+        <h2 className="text-4xl font-semibold mb-8">Affordable Pricing</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <div className="p-6 bg-white rounded-lg shadow-md">
+            <h3 className="text-2xl font-bold mb-4">Basic Plan</h3>
+            <p className="text-lg">$19.99/month</p>
+            <p>1 puzzle delivered every month</p>
+          </div>
+          <div className="p-6 bg-white rounded-lg shadow-md">
+            <h3 className="text-2xl font-bold mb-4">Premium Plan</h3>
+            <p className="text-lg">$29.99/month</p>
+            <p>1 puzzle + bonus gift every month</p>
+          </div>
+          <div className="p-6 bg-white rounded-lg shadow-md">
+            <h3 className="text-2xl font-bold mb-4">Annual Plan</h3>
+            <p className="text-lg">$199.99/year</p>
+            <p>Save more with an annual subscription</p>
+          </div>
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section className="py-16 px-4 bg-gradient-to-r from-purple-600 to-indigo-600">
-        <div className="max-w-6xl mx-auto text-center">
-          <motion.h2
-            className="text-5xl font-bold mb-10 text-background"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
-          >
-            Unlock Your Puzzle Adventure
-          </motion.h2>
-          <div className="flex flex-col md:flex-row justify-center items-start">
-            {[
-              {
-                plan: "Basic",
-                price: "10€",
-                features: [
-                  "1 Monthly Puzzle",
-                  "Casual Difficulty",
-                  "Free Shipping",
-                ],
-                description: "Perfect for beginners!",
-              },
-              {
-                plan: "Plus",
-                price: "20€",
-                features: [
-                  "1 Challenging Puzzle/Month",
-                  "Expert Difficulty",
-                  "Expedited Shipping",
-                ],
-                description: "For seasoned puzzlers!",
-              },
-            ].map((pricing, index) => (
-              <motion.div
-                className="bg-secondary text-text p-8 m-4 rounded-lg shadow-lg w-full max-w-xs transform transition-transform duration-300 hover:scale-105"
-                key={index}
-                variants={fadeIn}
-                initial={{ scale: 0.8 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.5 }}
-              >
-                <div className="relative mb-6">
-                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 bg-accent text-background text-4xl font-bold p-4 rounded-full">
-                    {pricing.plan}
-                  </div>
-                  <div className="mt-10 mb-4 text-3xl font-bold">
-                    {pricing.price} <span className="text-lg">/ month</span>
-                  </div>
-                </div>
-                <p className="text-lg italic mb-4">{pricing.description}</p>
-                <ul className="text-lg mb-6">
-                  {pricing.features.map((feature, idx) => (
-                    <li key={idx} className="mb-2 flex items-center">
-                      <span className="mr-2 text-xl text-accent">✔️</span>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                <motion.button
-                  className="bg-primary hover:bg-accent text-background px-8 py-3 rounded-lg text-xl transition-colors duration-300 shadow-md"
-                  variants={hoverEffect}
-                  whileHover="hover"
-                  whileTap="tap"
-                >
-                  Get Started
-                </motion.button>
-              </motion.div>
-            ))}
+      {/* FAQ Section */}
+      <section className="py-20 text-center bg-background">
+        <h2 className="text-4xl font-semibold mb-8">
+          Frequently Asked Questions
+        </h2>
+        <div className="max-w-4xl mx-auto">
+          <div className="mb-6">
+            <h3 className="text-2xl font-bold mb-2">What is PuzzleBox?</h3>
+            <p>
+              PuzzleBox is a subscription service that delivers a new 3D-printed
+              puzzle to your doorstep every month.
+            </p>
+          </div>
+          <div className="mb-6">
+            <h3 className="text-2xl font-bold mb-2">
+              How does the subscription work?
+            </h3>
+            <p>
+              Choose a plan, and you'll receive a new puzzle every month, with
+              no additional shipping charges!
+            </p>
+          </div>
+          <div className="mb-6">
+            <h3 className="text-2xl font-bold mb-2">Can I cancel anytime?</h3>
+            <p>
+              Yes, you can cancel or change your subscription at any time with
+              no penalties.
+            </p>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-8 bg-gradient-to-r from-purple-600 to-indigo-600 text-center text-text">
-        <p>&copy; 2024 Puzzle Monthly. All rights reserved.</p>
+      <footer className="bg-[var(--primary)] text-white py-2">
+        <div className="container mx-auto px-4 text-center">
+          <p>&copy; 2024 rebike. Website made by a student for students.</p>
+        </div>
       </footer>
     </div>
   );
 }
-
-export default HomePage;
